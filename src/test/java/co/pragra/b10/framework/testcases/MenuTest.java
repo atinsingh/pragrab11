@@ -1,17 +1,22 @@
 package co.pragra.b10.framework.testcases;
 
 import co.pragra.b10.framework.drivermanagement.DriverManager;
+import co.pragra.b10.framework.listeners.ScreenshotListner;
 import co.pragra.b10.framework.pageobjects.AboutUs;
 import co.pragra.b10.framework.pageobjects.ContactUsPage;
 import co.pragra.b10.framework.pageobjects.HomePage;
 import co.pragra.b10.framework.pageobjects.TopMenu;
+import co.pragra.b10.framework.util.CommonUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
 
+@Listeners(ScreenshotListner.class)
 public class MenuTest {
     WebDriver driver;
 
@@ -38,12 +43,22 @@ public class MenuTest {
 
         contactUsPage.enterName("Karan")
                 .enterEmaik("karan@pragra.co")
-                .enterPhone("2836387626")
-                .chooseByIndex(2)
+                .enterPhone("2836387626");
+
+        CommonUtils.captureScreenShot(Paths.get("target","screenshots","pass"), CommonUtils.generateFileNameWithTimeStamp("Interim_Test") ,driver);
+
+        contactUsPage .chooseByIndex(2)
                 .enterSubject("Testing")
                 .enterMsg("This is just a test-please ignore or charge me")
                 .submitForm();
 
 
     }
+
+    @Test
+    public void testBlank(){
+        //CommonUtils.captureScreenShot(Paths.get("target"),"arbit.jpeg",driver);
+    }
 }
+
+
