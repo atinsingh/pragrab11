@@ -6,6 +6,7 @@ import co.pragra.b10.framework.pageobjects.AboutUs;
 import co.pragra.b10.framework.pageobjects.ContactUsPage;
 import co.pragra.b10.framework.pageobjects.HomePage;
 import co.pragra.b10.framework.pageobjects.TopMenu;
+import co.pragra.b10.framework.testdata.ExcelReader;
 import co.pragra.b10.framework.util.CommonUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -35,30 +36,44 @@ public class MenuTest {
 
     }
 
-    @Test
-    public void contactTest(){
+    @Test(dataProviderClass = ExcelReader.class, dataProvider = "excelData")
+    public void contactTest(String fullname, String phone,
+                            String email,String option,
+                            String subject, String msg){
         HomePage homePage = new HomePage(driver);
         TopMenu topMenu = homePage.clickOnMenu();
         ContactUsPage contactUsPage = topMenu.clickOnContactUs();
 
-        contactUsPage.enterName("Karan")
-                .enterEmaik("karan@pragra.co")
-                .enterPhone("2836387626");
+        contactUsPage.enterName(fullname)
+                .enterEmaik(email)
+                .enterPhone(phone);
 
-        CommonUtils.captureScreenShot(Paths.get("target","screenshots","pass"), CommonUtils.generateFileNameWithTimeStamp("Interim_Test") ,driver);
+       // CommonUtils.captureScreenShot(Paths.get("target","screenshots","pass"), CommonUtils.generateFileNameWithTimeStamp("Interim_Test") ,driver);
 
-        contactUsPage .chooseByIndex(2)
-                .enterSubject("Testing")
-                .enterMsg("This is just a test-please ignore or charge me")
-                .submitForm();
+        try{
+            contactUsPage.chooseByValue(option)
+                    .enterSubject(subject)
+                    .enterMsg(msg)
+                    .submitForm();
+
+        }catch (Exception ex){
+            CommonUtils.captureScreenShot(Paths.get("target,screenshot"),"ABC.jpeg",driver);
+        }
 
 
     }
 
-    @Test
-    public void testBlank(){
-        //CommonUtils.captureScreenShot(Paths.get("target"),"arbit.jpeg",driver);
-    }
+//    @Test(dataProviderClass = ExcelReader.class, dataProvider = "excelData")
+//    public void testBlank(String fullname, String phone,
+//                          String email,String option,
+//                          String subject, String msg
+//                          ){
+//
+//        System.out.println(fullname + " "+
+//            phone + "  "+ email + " " + option + " "+ subject
+//                + " " + msg
+//        );
+//    }
 }
 
 
