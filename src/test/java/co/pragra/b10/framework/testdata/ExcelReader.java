@@ -7,6 +7,8 @@ import org.testng.annotations.DataProvider;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -15,13 +17,13 @@ import java.util.List;
 public class ExcelReader {
     // Read the excel and prepare the dataProvider
     private String dataFileName = DriverConfig.getProperty("testDataFileName");
-    private String path = DriverConfig.getProperty("testDataFileLocation");
+    private Path path = Paths.get(DriverConfig.getProperty("testDataFileLocation"));
 
     private static Workbook workbook;
 
     public ExcelReader(){
         try {
-            FileInputStream inputStream = new FileInputStream(path+dataFileName);
+            FileInputStream inputStream = new FileInputStream(path+"/"+dataFileName);
             workbook = new XSSFWorkbook(inputStream);
 
         }catch (IOException ex){
