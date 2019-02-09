@@ -28,7 +28,7 @@ public class MenuTest {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void tcAboutUsTest(){
         HomePage homePage = new HomePage(driver);
         TopMenu menu =    homePage.clickOnMenu();

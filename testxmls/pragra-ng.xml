@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="ZoomAutomation2">
+    <test name="zoomauotmation2">
+        <packages>
+            <package name="co.pragra.b10.framework.testcases"></package>
+        </packages>
+    </test> <!-- zoomauotmation -->
+</suite> <!-- Default-->
