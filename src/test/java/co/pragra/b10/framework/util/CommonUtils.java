@@ -1,6 +1,8 @@
 package co.pragra.b10.framework.util;
 
+import co.pragra.b10.framework.config.DriverConfig;
 import co.pragra.b10.framework.drivermanagement.DriverManager;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -21,9 +23,16 @@ public class CommonUtils {
         return  "ScreenSHot_"+ testName +"_" + format.format(date)+".png";
     }
 
-    public static void captureScreenShot(Path directory, String fileName ,WebDriver driver){
+    public static void captureScreenShot(Status status, String fileName ,WebDriver driver){
+        if(status==Status.PASS){
+            String directory = DriverConfig.getProperty("passLocation");
+        }else {
+            String directory = DriverConfig.getProperty("failLocation");
+        }
+
         try {
-            Files.createDirectory(directory);
+            FileUtils.forceMkdir(directory.toFile());
+           // Files.createDirectory(directory);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -36,5 +45,8 @@ public class CommonUtils {
         }catch (Exception ex){
         }
 
+    }
+    public static String getScreenShotPath(String fileName){
+        return null;
     }
 }
