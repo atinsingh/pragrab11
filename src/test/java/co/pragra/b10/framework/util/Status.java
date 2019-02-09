@@ -1,5 +1,5 @@
 package co.pragra.b10.framework.util;
 
-public enum  Constants {
+public enum Status {
    FAIL, PASS
 }

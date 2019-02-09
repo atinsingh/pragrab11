@@ -2,6 +2,7 @@ package co.pragra.b10.framework.listeners;
 
 import co.pragra.b10.framework.drivermanagement.DriverManager;
 import co.pragra.b10.framework.util.CommonUtils;
+import co.pragra.b10.framework.util.Status;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -29,19 +30,14 @@ public class ScreenshotListner implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-
-        Path path = Paths.get("target","screenshots","pass");
         String filename = CommonUtils.generateFileNameWithTimeStamp(iTestResult.getName());
-        CommonUtils.captureScreenShot(path,filename,DriverManager.getDriverInstance());
-
-
+        CommonUtils.captureScreenShot(Status.PASS,filename,DriverManager.getDriverInstance());
     }
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        Path path = Paths.get("target","screenshots","fail");
         String filename = CommonUtils.generateFileNameWithTimeStamp(iTestResult.getName());
-        CommonUtils.captureScreenShot(path,filename,DriverManager.getDriverInstance());
+        CommonUtils.captureScreenShot(Status.FAIL,filename,DriverManager.getDriverInstance());
 
     }
 

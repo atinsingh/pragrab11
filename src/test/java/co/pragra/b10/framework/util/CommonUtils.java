@@ -24,14 +24,15 @@ public class CommonUtils {
     }
 
     public static void captureScreenShot(Status status, String fileName ,WebDriver driver){
+        String directory;
         if(status==Status.PASS){
-            String directory = DriverConfig.getProperty("passLocation");
+            directory = DriverConfig.getProperty("passLocation");
         }else {
-            String directory = DriverConfig.getProperty("failLocation");
+            directory = DriverConfig.getProperty("failLocation");
         }
 
         try {
-            FileUtils.forceMkdir(directory.toFile());
+            FileUtils.forceMkdir(new File(directory));
            // Files.createDirectory(directory);
 
         } catch (IOException e) {
@@ -46,7 +47,10 @@ public class CommonUtils {
         }
 
     }
-    public static String getScreenShotPath(String fileName){
-        return null;
+    public static String getScreenShotPath(Status status, String fileName){
+        if(Status.PASS==status){
+            return DriverConfig.getProperty("passLocation")+"/"+fileName;
+        }
+        return DriverConfig.getProperty("failLocation")+"/"+fileName;
     }
 }
