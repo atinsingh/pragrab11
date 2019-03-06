@@ -3,9 +3,7 @@ package co.pragra.b10.framework.util;
 import co.pragra.b10.framework.config.DriverConfig;
 import co.pragra.b10.framework.drivermanagement.DriverManager;
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -52,5 +50,19 @@ public class CommonUtils {
             return DriverConfig.getProperty("passLocation")+"/"+fileName;
         }
         return DriverConfig.getProperty("failLocation")+"/"+fileName;
+    }
+
+    public static void sleep(int sleep){
+        try{
+            Thread.sleep(sleep);
+
+        }catch (InterruptedException ex){
+
+        }
+    }
+
+    public static void scollinView(WebElement element){
+     JavascriptExecutor executor=   (JavascriptExecutor)DriverManager.getDriverInstance();
+        executor.executeScript("arguments[0].scrollIntoView(true);", element);
     }
 }

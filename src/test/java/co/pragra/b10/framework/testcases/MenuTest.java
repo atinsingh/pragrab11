@@ -3,7 +3,6 @@ package co.pragra.b10.framework.testcases;
 import co.pragra.b10.framework.config.DriverConfig;
 import co.pragra.b10.framework.drivermanagement.DriverManager;
 import co.pragra.b10.framework.listeners.ScreenshotListner;
-import co.pragra.b10.framework.pageobjects.AboutUs;
 import co.pragra.b10.framework.pageobjects.ContactUsPage;
 import co.pragra.b10.framework.pageobjects.HomePage;
 import co.pragra.b10.framework.pageobjects.TopMenu;
@@ -13,14 +12,12 @@ import co.pragra.b10.framework.util.CommonUtils;
 import co.pragra.b10.framework.util.Status;
 import com.aventstack.extentreports.ExtentTest;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.concurrent.TimeUnit;
 
 @Listeners(ScreenshotListner.class)
@@ -62,6 +59,10 @@ public class MenuTest {
         TopMenu topMenu = homePage.clickOnMenu();
         ContactUsPage contactUsPage = topMenu.clickOnContactUs();
 
+
+
+
+
         contactUsPage.enterName(fullname)
                 .enterEmaik(email)
                 .enterPhone(phone);
@@ -92,6 +93,7 @@ public class MenuTest {
 //                + " " + msg
 //        );
 //    }
+
 
     @AfterTest
     public void tearDown(){
